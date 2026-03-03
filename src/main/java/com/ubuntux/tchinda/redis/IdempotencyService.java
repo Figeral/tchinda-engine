@@ -1,9 +1,9 @@
 package com.ubuntux.tchinda.redis;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.ubuntux.tchinda.model.Event;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -12,12 +12,18 @@ import java.time.Duration;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class IdempotencyService {
 
-    private final StringRedisTemplate redisTemplate;
-    private static final String REDIS_PREFIX = "event:fp:";
+    private final Cache<String, Boolean> eventCache;
+    private static final String CACHE_PREFIX = "event:fp:";
     private static final Duration TTL = Duration.ofDays(120);
+
+    public IdempotencyService() {
+        this.eventCache = Caffeine.newBuilder()
+                .expireAfterWrite(TTL)
+                .maximumSize(100_000)
+                .build();
+    }
 
     /**
      * Tries to lock the event hash.
@@ -29,12 +35,10 @@ public class IdempotencyService {
         String hash = generateFingerprint(event.getTitle(), event.getUrl());
         event.setFingerprint(hash);
 
-        String key = REDIS_PREFIX + hash;
+        String key = CACHE_PREFIX + hash;
 
-        Boolean success = redisTemplate.opsForValue().setIfAbsent(key, "1", TTL);
-        // If success is null, interpret as false (could happen depending on Redis
-        // driver).
-        return Boolean.TRUE.equals(success);
+        Boolean previousValue = eventCache.asMap().putIfAbsent(key, Boolean.TRUE);
+        return previousValue == null;
     }
 
     private String generateFingerprint(String title, String url) {
