@@ -3,17 +3,17 @@ spring:
     name: tchinda
 
   # Redis Configuration
-  data:
-    redis:
-      host: localhost
-      port: 6379
+  # data:
+  #   redis:
+  #     host: localhost
+  #     port: 6379
 
   # Email Configuration (Replace with real SMTP details when running)
   mail:
-    host: smtp.example.com
+    host: ${MAIL_HOST}
     port: 587
-    username: your_smtp_user
-    password: your_smtp_password
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -25,13 +25,13 @@ spring:
 app:
   # SerpAPI Configuration
   serpapi:
-    api-key: "YOUR_SERPAPI_KEY_HERE"
+    api-key: ${SERPAPI_KEY}
     base-url: "https://serpapi.com/search.json"
 
   # Email Configuration
   email:
-    recipient: "target@example.com"
-    sender: "radar@example.com"
+    recipient: ${MAIL_RECIPIENT}
+    sender: ${MAIL_SENDER}
 
   # Search Queries (using ${event} as template replacement)
   queries:
