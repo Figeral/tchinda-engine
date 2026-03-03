@@ -1,1 +1,10 @@
-/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/App.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/ranking/RankingEngine.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/config/RedisConfig.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/config/AppProperties.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/model/Event.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/scheduler/DailyJob.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/TchindaApplication.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/redis/IdempotencyService.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/mail/MailService.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/serpapi/SerpApiClient.java
+/Users/katika/Downloads/tchinda/src/main/java/com/ubuntux/tchinda/engine/IntelligenceEngine.java
