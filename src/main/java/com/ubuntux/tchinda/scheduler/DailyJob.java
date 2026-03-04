@@ -15,8 +15,8 @@ public class DailyJob {
 
     // Run every day at 8:00 AM (server local time)
     // Or we could use fixedDelay/fixedRate for testing.
-    // Let's use cron for once a day. (0 0 8 * * ?)
-    @Scheduled(cron = "${app.scheduler.cron:0 0 8 * * ?}")
+    // Run every minute for testing purposes
+    @Scheduled(cron = "${app.scheduler.cron:0 * * * * ?}")
     public void runRadar() {
         log.info("Triggering scheduled event radar job");
         try {

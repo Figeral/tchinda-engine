@@ -35,16 +35,17 @@ app:
 
   # Search Queries (using ${event} as template replacement)
   queries:
-    - "${event} douala cameroon"
-    - "U.S venture firms application deadline"
-    - "${event} fintech competition africa"
+    - "${event} events this month douala cameroon"
+    - "U.S venture firms application events"
+    - "${event} competition africa"
 
   # Keywords that get injected into the queries containing ${event}
   event-keywords:
     - fintech
-    - summit
-    - venture
+    - tech summit
+    - venture capital firm
     - hackathon
+    - Banking
 
   # Location boost weights for ranking
   location-weights:
